@@ -16,54 +16,64 @@
 
 package org.mcsoxford.rss;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Data about an RSS item.
  * 
  * @author Mr Horn
  */
 public class RSSItem extends RSSBase {
-  private final java.util.List<MediaThumbnail> thumbnails;
-  private String content;
-	private MediaEnclosure enclosure;
+    private final List<MediaThumbnail> thumbnails;
+    private String content;
+    private MediaEnclosure enclosure;
 
-  /* Internal constructor for RSSHandler */
-  RSSItem(byte categoryCapacity, byte thumbnailCapacity) {
-    super(categoryCapacity);
-    thumbnails = new java.util.ArrayList<MediaThumbnail>(thumbnailCapacity);
-  }
+    /* Internal constructor for RSSHandler */
+    public RSSItem() {
+        this(0, 0);
+    }
 
-  /* Internal method for RSSHandler */
-  void addThumbnail(MediaThumbnail thumbnail) {
-    thumbnails.add(thumbnail);
-  }
+    /* Internal constructor for RSSHandler */
+    public RSSItem(int categoryCapacity, int thumbnailCapacity) {
+        super(categoryCapacity);
+        thumbnails = new ArrayList<MediaThumbnail>(thumbnailCapacity);
+    }
 
-  /**
-   * Returns an unmodifiable list of thumbnails. The return value is never
-   * {@code null}. Images are in order of importance.
-   */
-  public java.util.List<MediaThumbnail> getThumbnails() {
-    return java.util.Collections.unmodifiableList(thumbnails);
-  }
-  
-  /**
-   * Returns the value of the optional &lt;content:encoded&gt; tag
-   * @return string value of the element data
-   */
-  public String getContent() {
-    return content;
-  }
+    /* Internal method for RSSHandler */
+    void addThumbnail(MediaThumbnail thumbnail) {
+        thumbnails.add(thumbnail);
+    }
 
-  /* Internal method for RSSHandler */
-  void setContent(String content) {
-    this.content = content;
-  }
+    /**
+     * Returns an unmodifiable list of thumbnails. The return value is never {@code null}. Images are in order of
+     * importance.
+     */
+    public java.util.List<MediaThumbnail> getThumbnails() {
+        return Collections.unmodifiableList(thumbnails);
+    }
 
-	public MediaEnclosure getEnclosure() {
-		return enclosure;
-	}
+    /**
+     * Returns the value of the optional &lt;content:encoded&gt; tag
+     * 
+     * @return string value of the element data
+     */
+    public String getContent() {
+        return content;
+    }
 
-	void setEnclosure(MediaEnclosure enclosure) {
-		this.enclosure = enclosure;
-	}
+    /* Internal method for RSSHandler */
+    void setContent(String content) {
+        this.content = content;
+    }
+
+    public MediaEnclosure getEnclosure() {
+        return enclosure;
+    }
+
+    void setEnclosure(MediaEnclosure enclosure) {
+        this.enclosure = enclosure;
+    }
 
 }
